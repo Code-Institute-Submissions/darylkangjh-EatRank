@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}    
+    <h1>Update Restaurant!</h1>
+    <form method="POST">
+        <input type="text" name="restaurant" value="{{restaurant.restaurant}}">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

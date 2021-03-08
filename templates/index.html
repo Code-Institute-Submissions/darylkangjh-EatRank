@@ -8,10 +8,12 @@
         <a href="{{ url_for ('update_review', task_id=item._id) }}"><small><i>make changes - {{item._id}}</i></small> </a>
         <a href="{{ url_for ('delete_review', task_id=item._id) }}"><small class="text-danger"><i>delete - {{item._id}}</i></small> </a>
     {% endfor %}
-
+    <div class="p-5"></div>
     <h2>RESTAURANTS</h2>
     {% for item in restaurants %}
-        <h2>{{item.name}}</h2>
+        <h2>{{item.restaurant}}</h2>
+        <a href="{{ url_for ('update_restaurant', task_id=item._id) }}"><small><i>make changes - {{item._id}}</i></small> </a>
+
     {% endfor %}
 
 </main>
