@@ -95,6 +95,13 @@ def update_restaurant(task_id):
       "_id":ObjectId(task_id)
     })
     return render_template('restaurants/update_restaurant.html', restaurant = restaurant_edit)
+# DELETE RESTAURANT ROUTE
+@app.route('/delete_restaurant/<task_id>')
+def delete_restaurant(task_id):
+    db_restaurant.delete_one({
+        '_id':ObjectId(task_id)
+    })
+    return redirect(url_for('index'))
 
 
 

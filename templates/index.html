@@ -13,7 +13,7 @@
     {% for item in restaurants %}
         <h2>{{item.restaurant}}</h2>
         <a href="{{ url_for ('update_restaurant', task_id=item._id) }}"><small><i>make changes - {{item._id}}</i></small> </a>
-
+        <a href="{{ url_for ('delete_restaurant', task_id=item._id) }}"><small class="text-danger"><i>delete - {{item._id}}</i></small> </a>
     {% endfor %}
 
 </main>
