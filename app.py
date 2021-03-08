@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo
 from dotenv import load_dotenv
@@ -27,8 +27,11 @@ def index():
 @app.route('/create_review', methods=["GET", "POST"])
 def create_review():
     if request.method == "POST":
-        print("Post")
-        return "POST"
+        restaurant = request.form.get("restaurant")
+        db_review.insert({
+            'restaurant':restaurant
+        })
+        return redirect(url_for('index'))
     return render_template('create-review.html')
 
 
