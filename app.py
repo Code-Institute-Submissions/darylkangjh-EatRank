@@ -56,6 +56,14 @@ def update_review(task_id):
     })
     return render_template('update_review.html', review=review_edit)
 
+# DELETE REVIEW ROUTE
+@app.route('/delete_review/<task_id>')
+def delete_review(task_id):
+    db_review.delete_one({
+        '_id':ObjectId(task_id)
+    })
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
    app.run(host=os.environ.get('IP'), #host: where is it hosted at.. rep the address
            port=int(os.environ.get('PORT')), #port:  which port, environment variable
