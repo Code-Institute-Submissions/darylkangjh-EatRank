@@ -20,11 +20,13 @@ connect = pymongo.MongoClient(MONGO_URI)
 db_review =connect[DATABASE_NAME][COLLECTION_NAME]
 print("**** Connected to MongoDB Database ****")
 
+# HOME ROUTE 
 @app.route('/')
 def index():
     result = db_review.find({})
     return render_template('index.html', data=result)
 
+# CREATE REVIEW ROUTE
 @app.route('/create_review', methods=["GET", "POST"])
 def create_review():
     if request.method == "POST":
@@ -35,8 +37,20 @@ def create_review():
         return redirect(url_for('index'))
     return render_template('create_review.html')
 
+# UPDATE REVIEW ROUTE
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
+    if request.method == "POST":
+        restaurant = request.form.get("restaurant")
+        db_review.update({
+            "_id" : ObjectId(task_id)
+        },{
+            '$set': {
+            'restaurant': restaurant
+            }
+        }) 
+        return redirect(url_for('index'))
+
     review_edit = db_review.find_one({
       "_id":ObjectId(task_id)
     })
