@@ -1,11 +1,17 @@
 from flask import Flask, render_template, request
 import os
+from dotenv import load_dotenv
 
+# SET UP FLASK
 app = Flask(__name__)
+
+# SET UP FLASK SECRET KEY
+app.secret_key = os.environ.get('SECRET_KEY')
+
 
 @app.route('/')
 def index():
-    return "Hello world"
+    return render_template('index.html')
     
     
 if __name__ == '__main__':
