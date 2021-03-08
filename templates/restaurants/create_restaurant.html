@@ -3,7 +3,10 @@
 {% block content %}
     <h1>Create Restaurant!</h1>
     <form method="POST">
-        <input type="text" name="restaurant">
+        <input type="text" required name="restaurant" placeholder="Restaurant">
+        <input type="text" required name="location" placeholder="location">
+        <input type="text" required name="contact" placeholder="91234567">
+        <input type="email" required name="email" placeholder="xyz@gmail.com">
         <input type="submit" value="Submit">
     </form>
 {% endblock %}
