@@ -29,6 +29,7 @@ def index():
     restaurants = [{'name':'test'}]
     return render_template('index.html', reviews=reviews, restaurants=restaurants)
 
+#  REVIEW  ROUTES 
 # CREATE REVIEW ROUTE
 @app.route('/create_review', methods=["GET", "POST"])
 def create_review():
@@ -38,8 +39,7 @@ def create_review():
             'restaurant': restaurant
         })
         return redirect(url_for('index'))
-    return render_template('create_review.html')
-
+    return render_template('reviews/create_review.html')
 # UPDATE REVIEW ROUTE
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
@@ -57,8 +57,7 @@ def update_review(task_id):
     review_edit = db_review.find_one({
       "_id":ObjectId(task_id)
     })
-    return render_template('update_review.html', review=review_edit)
-
+    return render_template('reviews/update_review.html', review=review_edit)
 # DELETE REVIEW ROUTE
 @app.route('/delete_review/<task_id>')
 def delete_review(task_id):
@@ -67,6 +66,17 @@ def delete_review(task_id):
     })
     return redirect(url_for('index'))
 
+# RESTAURANT ROUTES
+# CREATE RESTAURANT ROUTES
+@app.route('/create_restaurant', methods=["GET", "POST"])
+def create_restaurant():
+    if request.method == "POST":
+        restaurant = request.form.get("restaurant")
+        db_review.insert({
+            'restaurant': restaurant
+        })
+        return redirect(url_for('index'))
+    return render_template('restaurants/create_restaurant.html')
 
 
 
