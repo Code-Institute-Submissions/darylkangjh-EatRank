@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from bson.objectid import ObjectId
 import os
 import pymongo
 from dotenv import load_dotenv
@@ -29,11 +30,17 @@ def create_review():
     if request.method == "POST":
         restaurant = request.form.get("restaurant")
         db_review.insert({
-            'restaurant':restaurant
+            'restaurant': restaurant
         })
         return redirect(url_for('index'))
-    return render_template('create-review.html')
+    return render_template('create_review.html')
 
+@app.route('/update_review/<task_id>', methods=["GET", "POST"])
+def update_review(task_id):
+    review_edit = db_review.find_one({
+      "_id":ObjectId(task_id)
+    })
+    return render_template('update_review.html', review=review_edit)
 
 if __name__ == '__main__':
    app.run(host=os.environ.get('IP'), #host: where is it hosted at.. rep the address
