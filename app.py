@@ -24,8 +24,11 @@ def index():
     result = db_review.find({})
     return render_template('index.html', data=result)
 
-@app.route('/create_review')
+@app.route('/create_review', methods=["GET", "POST"])
 def create_review():
+    if request.method == "POST":
+        print("Post")
+        return "POST"
     return render_template('create-review.html')
 
 
