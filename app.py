@@ -13,18 +13,21 @@ app.secret_key = os.environ.get('SECRET_KEY')
 # SET UP MONGODB
 MONGO_URI = os.environ.get('MONGO_URI')
 DATABASE_NAME = 'Eat_rank'
-COLLECTION_NAME = 'reviews'
+COLLECTION_REVIEW = 'reviews'
+COLLECTION_RESTAURANT = 'restaurants'
 
 # Connection to MONGODB
 connect = pymongo.MongoClient(MONGO_URI)
-db_review =connect[DATABASE_NAME][COLLECTION_NAME]
+db_review =connect[DATABASE_NAME][COLLECTION_REVIEW]
+db_restaurant =connect[DATABASE_NAME][COLLECTION_RESTAURANT]
 print("**** Connected to MongoDB Database ****")
 
 # HOME ROUTE 
 @app.route('/')
 def index():
-    result = db_review.find({})
-    return render_template('index.html', data=result)
+    reviews = db_review.find({})
+    restaurants = [{'name':'test'}]
+    return render_template('index.html', reviews=reviews, restaurants=restaurants)
 
 # CREATE REVIEW ROUTE
 @app.route('/create_review', methods=["GET", "POST"])
@@ -63,6 +66,10 @@ def delete_review(task_id):
         '_id':ObjectId(task_id)
     })
     return redirect(url_for('index'))
+
+
+
+
 
 if __name__ == '__main__':
    app.run(host=os.environ.get('IP'), #host: where is it hosted at.. rep the address
