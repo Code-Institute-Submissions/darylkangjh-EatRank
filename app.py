@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-import os, pymongo
+import os
+import pymongo
 from dotenv import load_dotenv
 
 # SET UP FLASK
@@ -8,10 +9,20 @@ app = Flask(__name__)
 # SET UP FLASK SECRET KEY
 app.secret_key = os.environ.get('SECRET_KEY')
 
+# SET UP MONGODB
+MONGO_URI = os.environ.get('MONGO_URI')
+DATABASE_NAME = 'Eat_rank'
+COLLECTION_NAME = 'reviews'
+
+# Connection to MONGODB
+connect = pymongo.MongoClient(MONGO_URI)
+db_review =connect[DATABASE_NAME][COLLECTION_NAME]
+print("**** Connected to MongoDB Database ****")
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    result = db_review.find({})
+    return render_template('index.html', data=result)
 
 @app.route('/create_review')
 def create_review():
