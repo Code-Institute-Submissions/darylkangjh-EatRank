@@ -82,13 +82,13 @@ def create_restaurant():
         restaurant = request.form.get("restaurant")
         location = request.form.get('location')
         contact = request.form.get('contact')
-        email = request.form.get('email')
+        description = request.form.get('description')
         db_restaurant.insert({
             'restaurant'    :   restaurant,
+            'rating'        :   0,
             'location'      :   location,
             'contact'       :   contact,
-            'email'         :   email
-
+            'description'   :   description
         })
         return redirect(url_for('index'))
     return render_template('restaurants/create_restaurant.html')
