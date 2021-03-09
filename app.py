@@ -66,6 +66,10 @@ def delete_review(task_id):
         '_id':ObjectId(task_id)
     })
     return redirect(url_for('index'))
+# SHOW REVIEWS BY SEARCH
+@app.route('/show_reviews')
+def show_reviews():
+    return render_template('reviews/show_reviews.html')
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
