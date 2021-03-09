@@ -32,15 +32,18 @@ def index():
 
 #  REVIEW  ROUTES 
 # CREATE REVIEW ROUTE
-@app.route('/create_review/<restaurant_id>', methods=["GET", "POST"])
-def create_review(restaurant_id):
+@app.route('/create_review/<task_id>', methods=["GET", "POST"])
+def create_review(task_id):
     if request.method == "POST":
         restaurant = request.form.get("restaurant")
         db_review.insert({
             'restaurant': restaurant
         })
         return redirect(url_for('index'))
-    return render_template('reviews/create_review.html')
+    restaurant_edit = db_restaurant.find_one({
+      "_id":ObjectId(task_id)
+    })
+    return render_template('reviews/create_review.html', restaurant=restaurant_edit)
 # UPDATE REVIEW ROUTE
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
