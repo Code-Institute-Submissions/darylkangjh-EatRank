@@ -46,6 +46,7 @@ main>div>div {
     height: 200px;
     width: 200px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 /* common classes */

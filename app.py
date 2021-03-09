@@ -32,8 +32,8 @@ def index():
 
 #  REVIEW  ROUTES 
 # CREATE REVIEW ROUTE
-@app.route('/create_review', methods=["GET", "POST"])
-def create_review():
+@app.route('/create_review/<restaurant_id>', methods=["GET", "POST"])
+def create_review(restaurant_id):
     if request.method == "POST":
         restaurant = request.form.get("restaurant")
         db_review.insert({
@@ -114,6 +114,11 @@ def delete_restaurant(task_id):
         '_id':ObjectId(task_id)
     })
     return redirect(url_for('index'))
+# SHOW RESTAURANTS BY SEARCH
+@app.route('/show_restaurants')
+def show_restaurants():
+    restaurants = db_restaurant.find({})
+    return render_template('restaurants/show_restaurants.html', restaurants=restaurants)
 
 
 
