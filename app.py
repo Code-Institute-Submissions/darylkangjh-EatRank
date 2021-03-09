@@ -22,6 +22,10 @@ db_review = connect[DATABASE_NAME][COLLECTION_REVIEW]
 db_restaurant = connect[DATABASE_NAME][COLLECTION_RESTAURANT]
 print("**** Connected to MongoDB Database ****")
 
+# SET UP CLOUDINARY
+CLOUD_NAME = os.environ.get('CLOUD_NAME')
+UPLOAD_PRESET = os.environ.get('UPLOAD_PRESET')
+
 
 # HOME ROUTE 
 @app.route('/')
@@ -83,15 +87,22 @@ def create_restaurant():
         location = request.form.get('location')
         contact = request.form.get('contact')
         description = request.form.get('description')
+
+        uploadURL = request.form.get('uploaded-file-url')
+        assetID = request.form.get('asset-id')
+
         db_restaurant.insert({
             'restaurant'    :   restaurant,
             'rating'        :   0,
             'location'      :   location,
             'contact'       :   contact,
-            'description'   :   description
+            'description'   :   description,
+            'uploadURL'     :   uploadURL,
+            'assetID'       :   assetID
+
         })
         return redirect(url_for('index'))
-    return render_template('restaurants/create_restaurant.html')
+    return render_template('restaurants/create_restaurant.html', cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
 # UPDATE RESTAURANT ROUTE
 @app.route('/update_restaurant/<task_id>', methods=["GET", "POST"])
 def update_restaurant(task_id):
@@ -122,6 +133,8 @@ def delete_restaurant(task_id):
 def show_restaurants():
     restaurants = db_restaurant.find({})
     return render_template('restaurants/show_restaurants.html', restaurants=restaurants)
+
+
 
 
 
