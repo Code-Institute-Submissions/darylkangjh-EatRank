@@ -39,18 +39,27 @@ def index():
 @app.route('/create_review/<task_id>', methods=["GET", "POST"])
 def create_review(task_id):
     if request.method == "POST":
-        restaurant = request.form.get("restaurant")
+        title = request.form.get("title")
+        review = request.form.get("review")
+        rating = request.form.get("rating")
+        user = request.form.get("user")
+
         db_review.insert({
-            'restaurant': restaurant
+            'restaurant_id' :   task_id,
+            'title'         :   title,
+            'review'        :   review,
+            'rating'        :   rating,
+            'user'          :   user
         })
         return redirect(url_for('index'))
-    restaurant_edit = db_restaurant.find_one({
+    restaurant = db_restaurant.find_one({
       "_id":ObjectId(task_id)
     })
-    return render_template('reviews/create_review.html', restaurant=restaurant_edit)
+    return render_template('reviews/create_review.html', item=restaurant)
 # UPDATE REVIEW ROUTE
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
+    # process the form if user click post
     if request.method == "POST":
         restaurant = request.form.get("restaurant")
         db_review.update({

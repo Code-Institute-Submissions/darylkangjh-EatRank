@@ -50,7 +50,6 @@ main>div>div {
     overflow: hidden;
     margin-bottom: 10px;
 }
-
 .btn-view {
     background-color: rgb(199, 127, 69);
     color: white;
@@ -103,6 +102,8 @@ main>div>div {
     top: 10px;
     right: 40px;
 }
+
+/* radio button  */
 
 /* common classes */
 .overlay {
