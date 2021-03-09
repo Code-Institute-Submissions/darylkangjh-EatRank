@@ -1,3 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;600&display=swap');
+
 body {
-    background-color: green;
+    background-color: black;
+    color : white;
+}
+.navbar-brand {
+    font-family: 'Roboto Slab', serif;
+}
+.brand {
+    font-size: 3rem;
+}
+
+/* main styling */
+main>div>div {
+    height: 300px;
+}
+.bg-main-01 {
+    background: url('../images/donut-sprinkle-400.png') ;
+    background-size: cover;
+    background-position: center;
+}
+.bg-main-02 {
+    background: url('../images/squid-dish-400.png') ;
+    background-size: cover;
+    background-position: center;
+}
+.bg-main-03 {
+    background: url('../images/prawn-dish-400.png');
+    background-size: cover;
+    background-position: center;
+}
+.bg-main-04 {
+    background: url('../images/mocktail-drinks-400.png') ;
+    background-size: cover;
+    background-position: center;
+}
+/* common classes */
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 768px) {
+    body {
+        /* background-color: blue; */
+    }
+    main>div>div {
+        height: 600px;
+    }
+}
+@media screen and (min-width: 990px) {
+    body {
+        /* background-color: maroon; */
+    }
+}
+@media screen and (min-width: 1200px) {
+    body {
+        /* background-color: sandybrown; */
+    }
 }
