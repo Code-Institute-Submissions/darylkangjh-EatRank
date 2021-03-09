@@ -36,22 +36,61 @@ main>div>div {
     background-position: center;
 }
 
-/* show_review.html */
+/* show_review.html and show_restaurant.html*/
 .review-box {
     width : 350px;
     height: 550px;
     background-color: sandybrown;
     margin : 15px auto;
+    position: relative;
 }
 .img-box {
     height: 200px;
-    width: 200px;
+    width: auto;
     overflow: hidden;
     margin-bottom: 10px;
 }
+.btn-add {
+    background-color: rgb(60, 167, 78);
+    color: white;
+    text-decoration: none;
+
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: small;
+
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+}
+.btn-delete {
+    background-color: rgb(167, 60, 60);
+    color: white;
+    text-decoration: none;
+
+    border-radius: 50%;
+    padding: 5px 9px;
+    font-size: small;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.btn-edit {
+    background-color: rgb(56, 52, 52);
+    color: white;
+    text-decoration: none;
+
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: small;
+
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
 
 /* common classes */
-
 .overlay {
     height: 100%;
     width: 100%;

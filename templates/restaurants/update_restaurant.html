@@ -1,9 +1,55 @@
 {% extends 'base.html' %}
 
-{% block content %}    
-    <h1>Update Restaurant!</h1>
-    <form method="POST">
-        <input type="text" name="restaurant" value="{{restaurant.restaurant}}">
-        <input type="submit" value="Submit">
-    </form>
+{% block content %}
+<section class="container-fluid p-5">
+    <div class="row">
+        <div class="col-12">
+            <h2>Update Restaurant!</h2>
+        </div>
+        <div class="col-md-6 col-12">
+            <!-- <div class="img-box"> -->
+            <img src="{{restaurant.uploadURL}}" class="img-fluid" alt="">
+            <!-- </div> -->
+            <small><i>Current image</i></small>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <form method="POST">
+                <!-- restaurant name -->
+                <div class="mb-3">
+                    <label for="restaurant" class="form-label">Restaurant Name : </label>
+                    <input type="text" class="form-control" id="restaurant" name="restaurant"
+                        value="{{restaurant.restaurant}}">
+                </div>
+                <!-- location  -->
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location : </label>
+                    <input type="text" class="form-control" id="location" name="location"
+                        value="{{restaurant.location}}">
+                </div>
+                <!-- contact -->
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact : </label>
+                    <input type="text" class="form-control" id="contact" name="contact" value="{{restaurant.contact}}">
+                </div>
+                <!-- description -->
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a description here" id="description"
+                        name="description" style="height: 150px">{{restaurant.description}}</textarea>
+                    <label for="description">Write up on the restaurant</label>
+                </div>
+                <!-- upload images -->
+                <div>
+                    <a id="upload_widget" class="cloudinary-button">Upload Files</a>
+                </div>
+                <input type="hidden" id="uploaded-file-url" name="uploaded-file-url"
+                    value="{{restaurant.uploadURL}}">
+                <input type="hidden" id="asset-id" name="asset-id" value="{{restaurant.assetID}}">
+
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</section>
 {% endblock %}
