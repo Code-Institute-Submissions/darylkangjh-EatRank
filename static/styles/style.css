@@ -16,12 +16,12 @@ main>div>div {
     height: 300px;
 }
 .bg-main-01 {
-    background: url('../images/donut-sprinkle-400.png') ;
+    background: url('../images/sashimi-dish-400.png') ;
     background-size: cover;
     background-position: center;
 }
 .bg-main-02 {
-    background: url('../images/squid-dish-400.png') ;
+    background: url('../images/donut-sprinkle-400.png') ;
     background-size: cover;
     background-position: center;
 }
@@ -49,6 +49,20 @@ main>div>div {
     width: auto;
     overflow: hidden;
     margin-bottom: 10px;
+}
+
+.btn-view {
+    background-color: rgb(199, 127, 69);
+    color: white;
+    text-decoration: none;
+
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: small;
+
+    position: absolute;
+    bottom: -15px;
+    right: 50px;
 }
 .btn-add {
     background-color: rgb(60, 167, 78);

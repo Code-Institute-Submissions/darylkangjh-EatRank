@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="container-fluid p-5">
+<section class="container-fluid px-5">
     <div class="row">
         <div class="col-12"><h1>Create Restaurant!</h1></div>
         <div class="col-md-6 col-12">
@@ -33,8 +33,11 @@
 				<input type="hidden" id="uploaded-file-url" name="uploaded-file-url"/>
 				<input type="hidden" id="asset-id" name="asset-id"/>
 
-                <button type="submit" class="btn btn-primary mt-3">update</button>
+                <button type="submit" class="btn btn-dark mt-3">update</button>
             </form>
+        </div>
+        <div class="col-md-6 col-12 text-center">
+            <img src="{{ url_for('static', filename='images/sashimi-dish-400.png') }}" class="img-fluid" alt="">
         </div>
     </div>
         

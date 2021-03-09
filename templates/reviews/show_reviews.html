@@ -4,32 +4,39 @@
 <section class="container-fluid p-3">
     <div class="row">
         <div class="col-12">
-            <h2>Read reviews of all content</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis distinctio ratione sed illum, reiciendis, id quas alias rerum, aperiam quam repellat necessitatibus eligendi maiores quaerat porro inventore ea ab nesciunt?</p>
+            <h2>Read reviews of {{item.restaurant}}</h2>
         </div>
-        <div class="col-md-4 col-12">
+        <div class="col-lg-5 col-md-6 col-12">
             <div class="review-box p-3">
                 <div class="img-box">
-                    <img src="{{url_for('static', filename = 'images/squid-dish-400.png')}}" class="img-fluid" alt="">
+                    <img src="{{item.uploadURL}}" class="img-fluid" alt="">
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <h4>Restaurant</h4> 
-                    </div>
-                    <div class="col-6">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
+                    <div class="col">
+                        <h4>{{item.restaurant}}</h4> 
                     </div>
                     <div class="col-12">
-                        <i>(reviewed by James Taste Alot)</i>
+                        {% if item.rating >= 1 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 2 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 3 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 4 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 5 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                    </div>
+                    <div class="col-12">
+                        <i>(Located @ {{item.location}})</i>
+                    </div>
+                    <div class="col-12">
+                        <i>Contact : {{item.contact}}</i>
                     </div>
                     <div class="col-12">
                         <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eum unde incidunt exercitationem fuga repellat eligendi, laudantium libero atque eaque molestiae adipisci error at optio, minus sed voluptatum fugit cupiditate.
+                        {{item.description}}
                     </p>
+                    <a href="{{ url_for ('show_restaurants') }}" class="btn-view">back</a>
+                    <a href="{{ url_for ('create_review', task_id=item._id)}}" class="btn-add">Give review</a>
+                    <a href="{{ url_for ('update_restaurant', task_id=item._id)}}" class="btn-edit"><i class="fas fa-edit"></i></a>
+                    <a href="{{ url_for ('delete_restaurant', task_id=item._id)}}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>
+                    
                     </div>
                 </div>
                  
@@ -37,6 +44,22 @@
                 
                 
                
+            </div>
+        </div>  
+        <div class="col-lg-6 col-md-5 col-12">
+            <div class="row">
+                <div class="col-12 pt-3 px-md-3 px-5">
+                    <h4>Fantastic Restaurant</h4>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star"></i>
+                                
+                    <p class="fst-italic text-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque recusandae quis consectetur dignissimos eveniet hic maxime tempore quo necessitatibus? Beatae suscipit deserunt earum nostrum harum tempore similique impedit ut.</p>
+                </div>
+
+                
             </div>
         </div>
                    

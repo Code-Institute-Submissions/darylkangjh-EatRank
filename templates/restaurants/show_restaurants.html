@@ -4,11 +4,11 @@
 <section class="container-fluid p-3">
     <div class="row">
         <div class="col-12">
-            <h2>Read reviews of all content</h2>
+            <h2>Restaurant listings</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis distinctio ratione sed illum, reiciendis, id quas alias rerum, aperiam quam repellat necessitatibus eligendi maiores quaerat porro inventore ea ab nesciunt?</p>
         </div>
         {% for item in restaurants %}
-        <div class="col-md-4 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
             <div class="review-box p-3">
                 <div class="img-box">
                     <img src="{{item.uploadURL}}" class="img-fluid" alt="">
@@ -34,6 +34,7 @@
                         <p>
                         {{item.description}}
                     </p>
+                    <a href="{{ url_for ('show_reviews', task_id=item._id)}}" class="btn-view">View review</a>
                     <a href="{{ url_for ('create_review', task_id=item._id)}}" class="btn-add">Give review</a>
                     <a href="{{ url_for ('update_restaurant', task_id=item._id)}}" class="btn-edit"><i class="fas fa-edit"></i></a>
                     <a href="{{ url_for ('delete_restaurant', task_id=item._id)}}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>

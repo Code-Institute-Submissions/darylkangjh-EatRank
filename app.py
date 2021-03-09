@@ -74,9 +74,12 @@ def delete_review(task_id):
     })
     return redirect(url_for('index'))
 # SHOW REVIEWS BY SEARCH
-@app.route('/show_reviews')
-def show_reviews():
-    return render_template('reviews/show_reviews.html')
+@app.route('/show_reviews/<task_id>')
+def show_reviews(task_id):
+    restaurant_selected = db_restaurant.find_one({
+      "_id":ObjectId(task_id)
+    })
+    return render_template('reviews/show_reviews.html', item=restaurant_selected)
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
@@ -106,12 +109,6 @@ def create_restaurant():
 # UPDATE RESTAURANT ROUTE
 @app.route('/update_restaurant/<task_id>', methods=["GET", "POST"])
 def update_restaurant(task_id):
-    restaurant_edit = db_restaurant.find_one({
-      "_id":ObjectId(task_id)
-    })
-
-    
-
     if request.method == "POST":
         # Load in data from form
         restaurant = request.form.get("restaurant")
@@ -121,16 +118,6 @@ def update_restaurant(task_id):
         uploadURL = request.form.get('uploaded-file-url')
         assetID = request.form.get('asset-id')
         
-        print('......')
-        print(restaurant_edit['uploadURL'] )
-        print('......')
-        print(assetID)
-        print('......')
-        if uploadURL == "":
-            print("empty")
-            uploadURL=restaurant_edit['uploadURL']
-            assetID=restaurant_edit['assetID']
-
         # update Mongo database
         db_restaurant.update({
             "_id" : ObjectId(task_id)
@@ -146,7 +133,10 @@ def update_restaurant(task_id):
             }
         }) 
         return redirect(url_for('show_restaurants'))
-
+    
+    restaurant_edit = db_restaurant.find_one({
+      "_id":ObjectId(task_id)
+    })
     return render_template('restaurants/update_restaurant.html', restaurant = restaurant_edit, cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
 # DELETE RESTAURANT ROUTE
 @app.route('/delete_restaurant/<task_id>')
