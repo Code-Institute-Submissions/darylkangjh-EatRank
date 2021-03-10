@@ -115,6 +115,9 @@ main>div>div {
     justify-content: center;
     align-items: center;
 }
+.text-orange {
+    color: salmon;
+}
 @media screen and (min-width: 768px) {
     body {
         /* background-color: blue; */
