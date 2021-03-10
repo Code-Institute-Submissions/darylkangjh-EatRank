@@ -3,6 +3,7 @@ from bson.objectid import ObjectId
 import os
 import pymongo
 from dotenv import load_dotenv
+import random
 
 # SET UP FLASK
 app = Flask(__name__)
@@ -25,7 +26,6 @@ print("**** Connected to MongoDB Database ****")
 # SET UP CLOUDINARY
 CLOUD_NAME = os.environ.get('CLOUD_NAME')
 UPLOAD_PRESET = os.environ.get('UPLOAD_PRESET')
-
 
 # HOME ROUTE 
 @app.route('/')
@@ -87,17 +87,13 @@ def delete_review(task_id):
 # SHOW REVIEWS BY SEARCH
 @app.route('/show_reviews/<task_id>')
 def show_reviews(task_id):
-    reviews = db_review.find({
-        "restaurant_id" : task_id
-    })
     restaurant_selected = db_restaurant.find_one({
-      "_id":ObjectId(task_id)
+      "_id": ObjectId(task_id)
     })
-    
-
-    return render_template('reviews/show_reviews.html', 
-                        item=restaurant_selected, 
-                        reviews=reviews)
+    reviews = db_review.find({
+        "restaurant_id": task_id
+    })
+    return render_template('reviews/show_reviews.html', item=restaurant_selected, reviews=reviews)
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
@@ -168,10 +164,6 @@ def delete_restaurant(task_id):
 def show_restaurants():
     restaurants = db_restaurant.find({})
     return render_template('restaurants/show_restaurants.html', restaurants=restaurants)
-
-
-
-
 
 if __name__ == '__main__':
    app.run(host=os.environ.get('IP'), #host: where is it hosted at.. rep the address
