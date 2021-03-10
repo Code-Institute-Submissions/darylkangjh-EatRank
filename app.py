@@ -41,15 +41,16 @@ def create_review(task_id):
     if request.method == "POST":
         title = request.form.get("title")
         review = request.form.get("review")
-        rating = request.form.get("rating")
+        rating = request.form.get("rating") 
         user = request.form.get("user")
+        rating = int(rating)
         if user == "": 
             user = "Anonymous"
         db_review.insert({
             'restaurant_id' :   task_id,
             'title'         :   title,
             'review'        :   review,
-            'rating'        :   int(rating),
+            'rating'        :   rating,
             'user'          :   user
         })
         return redirect(url_for('index'))
