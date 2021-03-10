@@ -43,12 +43,13 @@ def create_review(task_id):
         review = request.form.get("review")
         rating = request.form.get("rating")
         user = request.form.get("user")
-
+        if user == "": 
+            user = "Anonymous"
         db_review.insert({
             'restaurant_id' :   task_id,
             'title'         :   title,
             'review'        :   review,
-            'rating'        :   rating,
+            'rating'        :   int(rating),
             'user'          :   user
         })
         return redirect(url_for('index'))
@@ -85,10 +86,17 @@ def delete_review(task_id):
 # SHOW REVIEWS BY SEARCH
 @app.route('/show_reviews/<task_id>')
 def show_reviews(task_id):
+    reviews = db_review.find({
+        "restaurant_id" : task_id
+    })
     restaurant_selected = db_restaurant.find_one({
       "_id":ObjectId(task_id)
     })
-    return render_template('reviews/show_reviews.html', item=restaurant_selected)
+    
+
+    return render_template('reviews/show_reviews.html', 
+                        item=restaurant_selected, 
+                        reviews=reviews)
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
