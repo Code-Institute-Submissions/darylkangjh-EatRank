@@ -3,20 +3,24 @@
 {% block content %}
 <main class="container-fluid">
     <div class="row">
+        
+        <div class="col-md-3 col-6 bg-main-02 p-0">
+            <div class="overlay bg-salmon-opac">
+                <div class="p-md-5 p-3">
+                    <h2>About EatRank</h2>
+                    <p>EatRank is a user base crowd-sourced review platform that delivers reviews from verified and approved users! Our restaurants participate by registering directly with us and consent to their reviews.</p>
+                </div>
+            </div>
+        </div>
         <div class="col-md-3 col-6 bg-main-01 p-0">
             <a class="overlay text-light text-decoration-none " href="{{ url_for ('show_restaurants')}}">
                <div><h2>Restaurants</h2></div>
             </a>
         </div>
-        <div class="col-md-3 col-6 bg-main-02 p-0">
-            <div class="overlay">
-                <div><h2>Appetizer Reviews</h2></div>
-            </div>
-        </div>
         <div class="col-md-3 col-6 bg-main-03 p-0">
-            <div class="overlay">
-                <div><h2>Mains Reviews</h2></div>
-            </div>
+            <a class="overlay text-light text-decoration-none " href="{{ url_for ('show_all_reviews')}}">
+                <div><h2>Read Reviews</h2></div>
+            </a>
         </div>
         <div class="col-md-3 col-6 bg-main-04 p-0">
             <div class="overlay">
