@@ -4,7 +4,6 @@ import os
 import pymongo
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 # SET UP FLASK
@@ -45,6 +44,9 @@ def index():
 
 @app.route('/create_review/<task_id>', methods=["GET", "POST"])
 def create_review(task_id):
+    restaurant = db_restaurant.find_one({
+        "_id": ObjectId(task_id)
+    })
     if request.method == "POST":
         title = request.form.get("title")
         review = request.form.get("review")
@@ -54,18 +56,20 @@ def create_review(task_id):
         if user == "":
             user = "Anonymous"
         db_review.insert({
-            'restaurant_id':   task_id,
-            'title':   title,
-            'review':   review,
-            'rating':   rating,
-            'user':   user
+            'restaurant_id': ObjectId(task_id),
+            'restaurant': restaurant['restaurant'],
+            'title': title,
+            'review': review,
+            'rating': rating,
+            'user': user
         })
         # Find the reviews under restaurant id
         reviews = db_review.find({
-            "restaurant_id": task_id
+            "restaurant_id": ObjectId(task_id)
         })
         # check the number of reviews
-        no_of_reviews = db_review.find({"restaurant_id": task_id}).count()
+        no_of_reviews = db_review.find(
+            {"restaurant_id":  ObjectId(task_id)}).count()
         restaurant_rating = 0
         # add up the total ratings
         for item in reviews:
@@ -81,10 +85,8 @@ def create_review(task_id):
             }
         })
         return redirect(url_for('index'))
-    restaurant = db_restaurant.find_one({
-        "_id": ObjectId(task_id)
-    })
     return render_template('reviews/create_review.html', item=restaurant)
+
 # UPDATE REVIEW ROUTE
 
 
@@ -106,6 +108,7 @@ def update_review(task_id):
         "_id": ObjectId(task_id)
     })
     return render_template('reviews/update_review.html', review=review_edit)
+
 # DELETE REVIEW ROUTE
 
 
@@ -114,30 +117,27 @@ def delete_review(task_id):
     db_review.delete_one({
         '_id': ObjectId(task_id)
     })
-    return redirect(url_for('index'))
+    return redirect(url_for('show_all_reviews'))
+
 # SHOW REVIEWS BY SEARCH
 
 
 @app.route('/show_reviews/<task_id>')
 def show_reviews(task_id):
-    restaurant_selected = db_restaurant.find_one({
-        "_id": ObjectId(task_id)
-    })
     reviews = db_review.find({
-        "restaurant_id": task_id
+        "restaurant_id":  ObjectId(task_id)
     })
     return render_template('reviews/show_reviews.html',
                            item=restaurant_selected,
                            reviews=reviews)
 
+# SHOW ALL REVIEWS IN DATABASES
+
 
 @app.route('/show_all_reviews')
 def show_all_reviews():
-    restaurants = db_restaurant.find({})
     reviews = db_review.find({})
-    return render_template('reviews/show_all_reviews.html',
-                           reviews=reviews,
-                           restaurants=restaurants)
+    return render_template('reviews/show_all_reviews.html', reviews=reviews)
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
@@ -167,6 +167,7 @@ def create_restaurant():
         return redirect(url_for('show_restaurants'))
     return render_template('restaurants/create_restaurant.html',
                            cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
+
 # UPDATE RESTAURANT ROUTE
 
 
@@ -203,6 +204,7 @@ def update_restaurant(task_id):
                            restaurant=restaurant_edit,
                            cloud_name=CLOUD_NAME,
                            upload_preset=UPLOAD_PRESET)
+
 # DELETE RESTAURANT ROUTE
 
 
@@ -212,6 +214,7 @@ def delete_restaurant(task_id):
         '_id': ObjectId(task_id)
     })
     return redirect(url_for('show_restaurants'))
+
 # SHOW RESTAURANTS BY SEARCH
 
 
