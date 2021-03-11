@@ -1,45 +1,152 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# EatRank | Best guide to the best food in town
 
-Welcome darylkangjh,
+## Introduction 
+EatRank is a crowd-source food review website that selects genuine customers from a community of food enthusiast to help review various restaurants in Singapore. The platform aims to moderate between the consumer’s need for credible information while balancing the anonymity of the internet which most famous reviews platform fail to moderate.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+At this current stage, the idea for the platform is to have EatRank employees add partner restaurants into our platform while reviewers are verified offline via a 1-day training programme on how to utilise the platform. 
 
-## Gitpod Reminders
+The platform aims to generate revenue from a small platform fee from restaurants and advertisements by “bumping” listings to the top of the page. 
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Demo
+### You may test the current working page at: 
+    https://p3-eatrank.herokuapp.com/
 
-`python3 -m http.server`
+### No login/logout create 
+This is a protocol to perform CRUD and future development will intend to allow Superuser to perform CRUD on all collections.
+Each user will only be able to perform CRUD on their own listing.
 
-A blue button should appear to click: *Make Public*,
+## UI/UX 
 
-Another blue button should appear to click: *Open Browser*.
+### Strategy
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+#### __Owner Goals__
+The site owner aims to use the platform to on-board partner restaurants and encourage more user sign ups. To that end, the initial phase of EatRank will allow verified users to create restaurants themselves by adding in places they have visited and wish to list on EatRank. This is to prove that the concept works and gather initial traffic to the site with an adequate number of restaurant listed.
+However, this feature will be temporary and closely monitored by the Team to ensure there is no exploitation of this feature. In future, restaurants can only be added by EatRank staff.
 
-A blue button should appear to click: *Make Public*,
+#### __User Goals__
 
-Another blue button should appear to click: *Open Browser*.
+##### Scope 
+__App features for members of the public:__
+1.	A page to show all restaurants with an option to see each individual restaurant’s review. 
+2.	A page to browse all reviews in the EatRank database
+3.	A page to login
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+__App features for EatRank Community Members:__ 
+1.	Log-in page 
+2.	Individual review page to create/update/delete reviews made by the community member 
+3.	Restaurant page to create/update/delete restaurants. 
 
-## Updates Since The Instructional Video
+##### User Story
+For the public, they may browse (or search) for the restaurant they intend to patronise and read up on the reviews before heading down. This is done primarily on the “Restaurants” page where they may click on the review button beneath each restaurant to read the reviews.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+For the public who like to read reviews casually, the “Review” page offers all the reviews, the reviewer, the rating as well as the restaurant name. This is designed for members of the public to browse and try out new places with interesting reviews. 
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+For community members, after logging in, they may edit their reviews by clicking on their name on the “Review” page which displays all the reviews within the EatRank database. 
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+Community members (upon logging in) may delete, edit or create new restaurants they visited. As mentioned in the introduction, this function is temporary.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+##### Unavailable features to be implemented soon
+1.  __Login/logout feature
+2.	__Hashing of password.__ Currently, passwords are stored as a string in MongoDB. This feature will be done before going live. 
+3.	__User/Password validation.__ Currently, there is no restrictions/limit to what a new community member can input to create an account. Technically, a new user may leave all the fields empty to sign up for EatRank. This shouldn’t be the case. For future development, validation will be included to ensure such discrepancies do not occur. 
+4.	__User edit & profile picture page.__ Customisation of a user profile is a good feature to increase a community user’s ownership and commitment to the platform. Future development will include this feature where any logging in will be able to add a profile picture, a short-description and the date they joined EatRank. 
+5.	__Lack of date for each review.__ This is an error discovered before submission. Date & timestamp should have been included for each review.
+6.	__Bootstrap -md mosaic template error.__ One bug found during testing was the lack of responsiveness for -md for the mosaic function on the “Review” page displaying all reviews. Further investigation is warranted. Current research did not yield any results on the cause of this error.
+7.	__Refined restaurant search & tag.__ One feature that was suggested but lacked the time to implement was a more refined search for restaurants. Future updates will include a “#” function for each restaurant so community users may create or follow tag trends and display those trends to the public. Restaurant may also be segmented base on their cuisine type (e.g. Japanese, Local, Fusion, Fine-Dining…) 
+8.	__Footer sitemap.__ UX wise, a site map for the footer will be included in future updates. 
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Structure
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Technologies used
+•	HTML5
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+•	CSS3
 
---------
+•	Python 2.7.5
 
-Happy coding!
+•	Javascript (for dependencies like Toastr & Bootstrap. No code was written in Javascript for this project)
+
+•   Bootstrap 4.0
+
+•   Toastr (to be implemented in future, dependecy installed)
+
+•	Mongo Atlas 4.4
+
+•	Cloudinary 1.22.0 
+
+•	Flask 1.1.2
+
+•	Flask-Login 0.5.0
+
+•	Gunicorn 20.0.4 
+
+•	Heroku
+
+### Programming Methodology 
+For security purposes, .env file was used together with gitignore in my working environment so that Mongo Secret and Cloudinary Secret are not pushed to GitHub.
+
+While this project only involved myself (Daryl), I used GitHub for source control for any day-to-day commit. Commits to Heroku were done at the beginning as a test and, subsequently, nearing the deadline of the project. 
+
+## Database Design 
+Due to the simplicity of relationship between various entities, MongoDB was used for it's scalability and the infancy of this project. It is a plan, if criterions/features are confirmed and stable, for this platform to adopt SQL database which will help with enforcing relationships between data strictly as compared to MongoDB. 
+
+Cuisine type and other search implementation are not in place due to lack of tiime.
+
+### Database relationships
+
+1. __Restaurants & Reviews| Many-to-many relationship__
+One restaurant may contain many reviews. This is the main purpose of the application to show the reviews related to the individual restaurants. The database strategy here is to use a reference as one ID can have many reviews and inserting duplicate reviews in the review database and the restaurant will only cause the restaurant to contain a wide list of array of reviews. However, the individual restaurant is embedded into the review it is for as a reference.  
+
+2. __Individuals & Reviews| Many-to-many relationship__
+Similar to the restaurant, a reference methodology was employed so that we avoid a large array/dictionary of items/objects. 
+
+
+## Testing 
+
+### Test for CRUD 
+| Step | Description            | Expected Outcomes                                                                    |
+|------|------------------------|--------------------------------------------------------------------------------------|
+| 1    | Create new restaurants |              |
+| 2    | Enter your name        | Must be unique to the database with no special characters. If not, validation error. |
+| 3    | Enter your contact     | Must contain 8-digit with no country code, special characters & alphabets.           |
+| 4    | Enter your email       | Email must include a "@" character.                                                  |
+| 5    | Enter desired password | Must be 8 characters long.                                                           |
+| 6    | Click submit           | Page should load https://dkjh-eatrank-project3.herokuapp.com/review with a greeting! |
+
+## Deployment 
+### To deploy on Heroku
+
+1. Download or Clone the master branch from github
+
+2. To list all the requirements in requirements.txt, run the following command in terminal:
+    ```
+     pip3 freeze --local > requirements.txt
+    ````
+3. Set Debug to False
+4. Procfile need to be created to run gunicorn upon deployment
+
+5. Git push to Heroku Master after all the documents are properly set up
+
+6. All public keys and private keys for the following need to be added to in Heroku Config Vars settings:
+
+    * MongoDB URI
+    * MongoDB Secret Key
+    * Dabatase Name : EatRank
+    * Cloudinary Upload Preset
+    * Cloudinary Cloud Name
+
+## Credits 
+1. __Freepik Premium Content Provider:__ Much of this project relied on Freepik image provider for the hi-res images on the beginning of the page. As the account used is premium, no attribution was required and it is free to use.
+2. __GetBootstrap.com:__ Bootstrap 4.0 was used for much of the layout for the flexbox & styling of individual reviews/restaurants,login pages and icons (did not rely on fontAwesome for this project).
+3. __Paul Chor:__ Provided the boiler plate template for Flask and mentorship for the whole of the project's life-cycle.
+4.  Google for some famous restaurants and use their picture for project purpose
+5.   www.unsplash.com - free images
+6.   w3school - references
+7.   stackoverflow - references
+8.   FontAwesome - free fonts & logos
+
+
+
+
+

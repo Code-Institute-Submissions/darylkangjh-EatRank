@@ -41,6 +41,8 @@ def index():
 
 #  REVIEW ROUTES
 # CREATE REVIEW ROUTE
+
+
 @app.route('/create_review/<task_id>', methods=["GET", "POST"])
 def create_review(task_id):
     if request.method == "POST":
@@ -128,16 +130,19 @@ def show_reviews(task_id):
                            item=restaurant_selected,
                            reviews=reviews)
 
+
 @app.route('/show_all_reviews')
 def show_all_reviews():
     restaurants = db_restaurant.find({})
     reviews = db_review.find({})
-    for item in reviews:
-        return render_template('reviews/show_all_reviews.html',
-                               reviews=reviews)
+    return render_template('reviews/show_all_reviews.html',
+                           reviews=reviews,
+                           restaurants=restaurants)
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
+
+
 @app.route('/create_restaurant', methods=["GET", "POST"])
 def create_restaurant():
     if request.method == "POST":
