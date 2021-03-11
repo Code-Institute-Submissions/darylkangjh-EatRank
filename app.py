@@ -126,7 +126,7 @@ def update_review(task_id):
             "_id": ObjectId(review_edit['restaurant_id'])
         }, {
             '$set': {
-                'rating':   review_edit['rating']
+                'rating':   restaurant_rating
             }
         })
         return redirect(url_for('show_all_reviews'))
@@ -147,6 +147,9 @@ def delete_review(task_id):
 
 @app.route('/show_reviews/<task_id>')
 def show_reviews(task_id):
+    restaurant_selected = db_restaurant.find_one({
+        "_id": ObjectId(task_id)
+    })
     reviews = db_review.find({
         "restaurant_id":  ObjectId(task_id)
     })
