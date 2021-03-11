@@ -1,8 +1,76 @@
 {% extends 'base.html' %}
 
-{% block content %}    <h1>Update Review!</h1>
-    <form method="POST">
-        <input type="text" name="restaurant" value="{{review.restaurant}}">
-        <input type="submit" value="Submit">
-    </form>
+{% block content %}
+<section class="container-fluid px-5">
+    <div class="row">
+        <div class="col-12">
+            <h2>You are editing your review for {{review.restaurant}}</h2>
+        </div>
+        <div class="col-md-6 col-12">
+            <form method="POST">
+                <!-- review title -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Review title : </label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="e.g Excellent Restaurant" value={{review.title}}>
+                </div>
+                <!-- review write up-->
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave your review here" id="review" name="review" style="height: 150px">{{review.review}}</textarea>
+                    <label for="review"></label>
+                </div>
+                <!-- rating  -->
+                <div class="row">
+                    <div class="col-12">
+                        
+                    </div>
+                <div class="col-md-8 col-10 d-flex justify-content-around">
+                    <div class="form-check my-2">
+                        <label class="form-label">Rating : </label>
+                    </div>
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="rating" id="rating1" value="1" {% if review['rating'] == 1 %} checked {% endif %}>
+                        <label class="form-check-label" for="rating1">
+                            1
+                        </label>
+                    </div>
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="rating" id="rating2" value="2" {% if review['rating'] == 2 %} checked {% endif %}>
+                        <label class="form-check-label" for="rating2">
+                            2
+                        </label>
+                    </div>
+                    <div class="form-check my-2"> 
+                        <input class="form-check-input" type="radio" name="rating" id="rating3" value="3" {% if review['rating'] == 3 %} checked {% endif %} >
+                        <label class="form-check-label" for="rating3">
+                            3
+                        </label>
+                    </div>
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="rating" id="rating4" value="4" {% if review['rating'] == 4 %} checked {% endif %}>
+                        <label class="form-check-label" for="rating4">
+                            4
+                        </label>
+                    </div>
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="rating" id="rating5" value="5" {% if review['rating'] == 5 %} checked {% endif %}>
+                        <label class="form-check-label" for="rating5">
+                            5
+                        </label>
+                    </div>
+                </div>
+                </div>
+
+                <!-- user -->
+                <div class="mb-3">
+                    <label for="user" class="form-label">Your name : </label>
+                    <input type="text" class="form-control" id="user" name="user" value={{review.user}}>
+                </div>
+
+                <button type="submit" class="btn btn-dark mt-3">Update review</button>
+            </form>
+        </div>
+       
+    </div>
+
+</section>
 {% endblock %}

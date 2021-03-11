@@ -111,6 +111,15 @@ main>div>div {
     padding: 5px 9px;
     font-size: small;
 }
+.btn-edit-review {
+    background-color: rgb(56, 52, 52);
+    color: white;
+    text-decoration: none;
+
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: small;
+}
 /* radio button  */
 
 /* common classes */

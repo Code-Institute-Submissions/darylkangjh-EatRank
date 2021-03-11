@@ -77,36 +77,59 @@ def create_review(task_id):
         # find the average rating for the restaurant
         restaurant_rating = round(restaurant_rating / no_of_reviews, 2)
         # update restaurant collection
-        db_restaurant.update({
-            "_id": ObjectId(task_id)
-        }, {
-            '$set': {
-                'rating':   restaurant_rating,
-            }
-        })
+        
         return redirect(url_for('index'))
     return render_template('reviews/create_review.html', item=restaurant)
 
 # UPDATE REVIEW ROUTE
-
-
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
+    review_edit = db_review.find_one({
+        "_id": ObjectId(task_id)
+    })
     # process the form if user click post
     if request.method == "POST":
-        restaurant = request.form.get("restaurant")
+        title = request.form.get("title")
+        review = request.form.get("review")
+        rating = request.form.get("rating")
+        user = request.form.get("user")
+        rating = int(rating)
+
+        # Update review database
         db_review.update({
             "_id": ObjectId(task_id)
         }, {
             '$set': {
-                'restaurant': restaurant
+                'title': title,
+                'review': review,
+                'rating': rating,
+                'user': user
             }
         })
-        return redirect(url_for('index'))
 
-    review_edit = db_review.find_one({
-        "_id": ObjectId(task_id)
-    })
+        # Find the reviews under restaurant id
+        reviews = db_review.find({
+            "restaurant_id": ObjectId(review_edit['restaurant_id'])
+        })
+        # check the number of reviews
+        no_of_reviews = db_review.find(
+            {"restaurant_id":  ObjectId(review_edit['restaurant_id'])}).count()
+        restaurant_rating = 0
+        # add up the total ratings
+        for item in reviews:
+            restaurant_rating = restaurant_rating + item['rating']
+        # find the average rating for the restaurant
+        restaurant_rating = round(restaurant_rating / no_of_reviews, 2)
+
+        # update restaurant rating database
+        db_restaurant.update({
+            "_id": ObjectId(review_edit['restaurant_id'])
+        }, {
+            '$set': {
+                'rating':   review_edit['rating']
+            }
+        })
+        return redirect(url_for('show_all_reviews'))
     return render_template('reviews/update_review.html', review=review_edit)
 
 # DELETE REVIEW ROUTE
