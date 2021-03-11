@@ -56,8 +56,6 @@ Community members (upon logging in) may delete, edit or create new restaurants t
 8.	__Footer sitemap.__ UX wise, a site map for the footer will be included in future updates. 
 
 
-### Structure
-
 ## Technologies used
 •	HTML5
 
@@ -107,12 +105,15 @@ Similar to the restaurant, a reference methodology was employed so that we avoid
 ### Test for CRUD 
 | Step | Description            | Expected Outcomes                                                                    |
 |------|------------------------|--------------------------------------------------------------------------------------|
-| 1    | Create new restaurants |              |
-| 2    | Enter your name        | Must be unique to the database with no special characters. If not, validation error. |
-| 3    | Enter your contact     | Must contain 8-digit with no country code, special characters & alphabets.           |
-| 4    | Enter your email       | Email must include a "@" character.                                                  |
-| 5    | Enter desired password | Must be 8 characters long.                                                           |
-| 6    | Click submit           | Page should load https://dkjh-eatrank-project3.herokuapp.com/review with a greeting! |
+| 1a   | View all restaurants | Click on show restaurants/ click on Restaurants to display all restaurants in database |
+| 1b   | Create new restaurants | Save to database and route to display all restaurants                                |
+| 1c   | Edit existing restaurant | Update, save to database and route to display all restaurants                      |
+| 1d   | Remove selected restaurant | Remove from database and route to display all restaurants                        |
+| 2a   | View all reviews | Display all reviews of various restaurants                               |
+| 2b   | Create new review | Add new review and tag to selected restaurant                              |
+| 2c   | Update existing review | Update, save to database and route to display all restaurants                             |
+| 2d   | Remove selected review | Remove from database and route to display all restaurants                              |
+
 
 ## Deployment 
 ### To deploy on Heroku

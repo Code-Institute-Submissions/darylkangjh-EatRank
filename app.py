@@ -77,8 +77,14 @@ def create_review(task_id):
         # find the average rating for the restaurant
         restaurant_rating = round(restaurant_rating / no_of_reviews, 2)
         # update restaurant collection
-        
-        return redirect(url_for('index'))
+        db_restaurant.update({
+            "_id": ObjectId(task_id)
+        }, {
+            '$set': {
+                'rating':   restaurant_rating
+            }
+        })
+        return redirect(url_for('show_restaurants'))
     return render_template('reviews/create_review.html', item=restaurant)
 
 # UPDATE REVIEW ROUTE
