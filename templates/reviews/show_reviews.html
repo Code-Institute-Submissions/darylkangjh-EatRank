@@ -21,6 +21,16 @@
                         {% if item.rating >= 3 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
                         {% if item.rating >= 4 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
                         {% if item.rating >= 5 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        <span class="ms-2 fst-italic">
+                            <small>
+                                (rating :
+                                {% if item.rating == 0 %}
+                                Not rated
+                                {% else %}
+                                 {{item.rating}}
+                                {% endif %})
+                            </small>
+                        </span>
                     </div>
                     <div class="col-12">
                         <i>(Located @ {{item.location}})</i>

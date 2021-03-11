@@ -41,8 +41,6 @@ def index():
 
 #  REVIEW ROUTES
 # CREATE REVIEW ROUTE
-
-
 @app.route('/create_review/<task_id>', methods=["GET", "POST"])
 def create_review(task_id):
     if request.method == "POST":
@@ -65,16 +63,21 @@ def create_review(task_id):
             "restaurant_id": task_id
         })
         # check the number of reviews
-        no_of_reviews = db_review.find({ "restaurant_id": task_id}).count()
+        no_of_reviews = db_review.find({"restaurant_id": task_id}).count()
         restaurant_rating = 0
         # add up the total ratings
         for item in reviews:
             restaurant_rating = restaurant_rating + item['rating']
         # find the average rating for the restaurant
-        restaurant_rating = restaurant_rating / no_of_reviews
-
-
-
+        restaurant_rating = round(restaurant_rating / no_of_reviews, 2)
+        # update restaurant collection
+        db_restaurant.update({
+            "_id": ObjectId(task_id)
+        }, {
+            '$set': {
+                'rating':   restaurant_rating,
+            }
+        })
         return redirect(url_for('index'))
     restaurant = db_restaurant.find_one({
         "_id": ObjectId(task_id)
@@ -121,8 +124,9 @@ def show_reviews(task_id):
     reviews = db_review.find({
         "restaurant_id": task_id
     })
-    return render_template('reviews/show_reviews.html', item=restaurant_selected, reviews=reviews)
-
+    return render_template('reviews/show_reviews.html',
+                           item=restaurant_selected,
+                           reviews=reviews)
 
 @app.route('/show_all_reviews')
 def show_all_reviews():
@@ -134,8 +138,6 @@ def show_all_reviews():
 
 # RESTAURANT ROUTES
 # CREATE RESTAURANT ROUTES
-
-
 @app.route('/create_restaurant', methods=["GET", "POST"])
 def create_restaurant():
     if request.method == "POST":
@@ -150,7 +152,7 @@ def create_restaurant():
         # Save to Mongo Database
         db_restaurant.insert({
             'restaurant':   restaurant,
-            'rating':   0,
+            'rating':   0.00,
             'location':   location,
             'contact':   contact,
             'description':   description,
@@ -165,6 +167,9 @@ def create_restaurant():
 
 @app.route('/update_restaurant/<task_id>', methods=["GET", "POST"])
 def update_restaurant(task_id):
+    restaurant_edit = db_restaurant.find_one({
+        "_id": ObjectId(task_id)
+    })
     if request.method == "POST":
         # Load in data from form
         restaurant = request.form.get("restaurant")
@@ -189,12 +194,10 @@ def update_restaurant(task_id):
             }
         })
         return redirect(url_for('show_restaurants'))
-
-    restaurant_edit = db_restaurant.find_one({
-        "_id": ObjectId(task_id)
-    })
     return render_template('restaurants/update_restaurant.html',
-                           restaurant=restaurant_edit, cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
+                           restaurant=restaurant_edit,
+                           cloud_name=CLOUD_NAME,
+                           upload_preset=UPLOAD_PRESET)
 # DELETE RESTAURANT ROUTE
 
 
