@@ -88,6 +88,8 @@ def create_review(task_id):
     return render_template('reviews/create_review.html', item=restaurant)
 
 # UPDATE REVIEW ROUTE
+
+
 @app.route('/update_review/<task_id>', methods=["GET", "POST"])
 def update_review(task_id):
     review_edit = db_review.find_one({
@@ -258,7 +260,6 @@ def show_restaurants():
 
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),  # host: where is it hosted at.. rep the address
-            # port:  which port, environment variable
+    app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)

@@ -7,11 +7,12 @@
             <div class="row">
                 <div class="col-md-8 col-10 mx-auto">
                     <h2>Restaurant listings</h2>
-                    <p>Find the best rated restaurant in this listing. Many have tasted and gave their feedbacks and reviews on the food. </p>
+                    <p>Find the best rated restaurant in this listing. Many have tasted and gave their feedbacks and
+                        reviews on the food. </p>
                     <h4>Try it now!</h4>
                 </div>
             </div>
-            </div>
+        </div>
         {% for item in restaurants %}
         <div class="col-lg-4 col-md-6 col-12">
             <div class="review-box p-3">
@@ -20,21 +21,26 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h4>{{item.restaurant}}</h4> 
+                        <h4>{{item.restaurant}}</h4>
                     </div>
                     <div class="col-12">
-                        {% if item.rating >= 1 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
-                        {% if item.rating >= 2 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
-                        {% if item.rating >= 3 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
-                        {% if item.rating >= 4 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
-                        {% if item.rating >= 5 %}<i class="fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 1 %}<i class="fas fa-star"></i>{% else %}<i
+                            class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 2 %}<i class="fas fa-star"></i>{% else %}<i
+                            class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 3 %}<i class="fas fa-star"></i>{% else %}<i
+                            class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 4 %}<i class="fas fa-star"></i>{% else %}<i
+                            class="far fa-star"></i>{% endif %}
+                        {% if item.rating >= 5 %}<i class="fas fa-star"></i>{% else %}<i
+                            class="far fa-star"></i>{% endif %}
                         <span class="ms-2 fst-italic">
                             <small>
                                 ( rating :
                                 {% if item.rating == 0 %}
                                 Not rated
                                 {% else %}
-                                 {{item.rating}}
+                                {{item.rating}}
                                 {% endif %}
                                 )
                             </small>
@@ -48,20 +54,22 @@
                     </div>
                     <div class="col-12">
                         <p>
-                        {{item.description}}
-                    </p>
-                    <a href="{{ url_for ('show_reviews', task_id=item._id)}}" class="btn-view">View review</a>
-                    <a href="{{ url_for ('create_review', task_id=item._id)}}" class="btn-add">Give review</a>
-                    <a href="{{ url_for ('update_restaurant', task_id=item._id)}}" class="btn-edit"><i class="fas fa-edit"></i></a>
-                    <a href="{{ url_for ('delete_restaurant', task_id=item._id)}}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>
-                    
+                            {{item.description}}
+                        </p>
+                        <a href="{{ url_for ('show_reviews', task_id=item._id)}}" class="btn-view">View review</a>
+                        <a href="{{ url_for ('create_review', task_id=item._id)}}" class="btn-add">Give review</a>
+                        <a href="{{ url_for ('update_restaurant', task_id=item._id)}}" class="btn-edit"><i
+                                class="fas fa-edit"></i></a>
+                        <a href="{{ url_for ('delete_restaurant', task_id=item._id)}}" class="btn-delete"><i
+                                class="fas fa-trash-alt"></i></a>
+
                     </div>
                 </div>
-                 
-                
-                
-                
-               
+
+
+
+
+
             </div>
         </div>
         {% else %}
